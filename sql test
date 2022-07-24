@@ -1,0 +1,9 @@
+import random
+import mysql.connector
+cnx = mysql.connector.connect(user='admin', password='12345678',host='blockdb-instance1.cqxy7vurxinp.us-east-1.rds.amazonaws.com',database='blockdb3')
+mycoursor= cnx.cursor()
+for i in range (2,100000):
+    k = random.getrandbits(128)
+    mycoursor.execute("INSERT INTO `blockdb3`.`temp_table` (`transactions`,`id`) VALUES ('" + str(k) + "','" + str(i) + "'); ")
+
+cnx.commit()
